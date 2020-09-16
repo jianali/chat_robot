@@ -52,14 +52,29 @@ class DiagnosticNode():
                 pNode.setChidNodes(tempNode)
         return self
 
-# 递归生成树结构的json文件
+    # 递归生成树结构的json文件
     def __json__(self):
+        return {"id":self.id,"childNodes":DiagnosticNode.child_json(self)}
+
+    def child_json(self):
         if self.childNodes==[]:
             # return {'id':self.id,'childNodes':[]}
             return ""
         else:
-           childsJson=''
+           childsJson=[]
+           # i=0
            for childNode in self.childNodes:
-                 childsJson+=str({'id': childNode.id, 'childNodes': [childNode.__json__()]})+','
+                 # i+=1
+                 # if i!=len(self.childNodes):
+                     childsJson.append({"id": childNode.id, "childNodes": childNode.child_json()})
+                     # childsJson+=str({'id': childNode.id, 'childNodes': [childNode.child_json()]})+','
+                 # else:
+                 #     childsJson.append({'id': childNode.id, 'childNodes': childNode.child_json()})
+                     # childsJson += str({'id': childNode.id, 'childNodes': [childNode.child_json()]})
                 # childsJson += str()+','
-           return {'id':self.id,'childNodes':[childsJson]}
+           # return {'id':self.id,'childNodes':[childsJson]}
+           return childsJson
+
+
+
+
