@@ -16,6 +16,7 @@ from jinja2 import Environment, PackageLoader
 
 from app.service.DiagnosticTree import DiagnosticTree
 from app.dto.DiagnosticNode import DiagnosticNode
+from app.service.NoticeService import NoticeService
 
 env = Environment(loader=PackageLoader('app', 'templates'))
 
@@ -51,12 +52,12 @@ async def chat(request, ws):
         # user_msg为客户发送过来的消息
         print('Received: ' + user_msg)
         # 根据发送过来的消息进行区分，访问数据库中的导引信息推送给客户端
+
+        # 如果识别不了，可以默认推送相关引导提示消息
+        await ws.send(NoticeService().defaultChatMessage())
+
         if (user_msg.find("inceptor")==1) :
-            await ws.send("为您找到如下排障知道，请点击链接查看。\n"
-                          "1、Inceptor服务启动故障；\n"
-                          "2、Inceptor性能调优及排查；\n"
-                          "3、SQL编译失败；\n"
-                          "4、Inceptor任务运行失败；\n")
+            await ws.send("")
 
 # 测试返回解析好的html文件
         a = DiagnosticNode(1, None, '根节点', [])
