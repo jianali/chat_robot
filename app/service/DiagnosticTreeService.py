@@ -2,7 +2,7 @@
 #这个服务涉及两张表，t_DiagnosticTree和t_Diagnostic_item
 
 
-from app.dto.DiagnosticTreeDto import DiagnosticTreeDto
+from app.model.DiagnosticTreeDto import DiagnosticTreeDto
 from app.util.MysqlUtil import MysqlUtil
 
 class DiagnosticTreeService():
@@ -23,7 +23,7 @@ class DiagnosticTreeService():
 # 返回单个组件的运维结构树,传入参数为组件名称
     def getDiagnosticTree(self,componentName):
 
-        self.__result = self.__mysqlUtil.querysql("select a.* from t_diagnostic_item a ,t_diagnostic_tree b where b.tree_name="+componentName+" and a.tree_id=b.id order by a.id;")
+        self.__result = self.__mysqlUtil.querysql("select a.* from t_diagnostic_item a ,t_diagnostic_tree b where b.tree_name='"+str(componentName)+"' and a.tree_id=b.id order by a.id;")
         print(type(self.__result))
         return self.__result
 

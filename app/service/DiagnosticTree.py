@@ -2,7 +2,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-from app.dto.DiagnosticNode import DiagnosticNode
+from app.model.DiagnosticNode import DiagnosticNode
 import json
 
 class DiagnosticTree:

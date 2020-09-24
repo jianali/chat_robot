@@ -69,9 +69,12 @@ class MysqlUtil:
 
 
     def querysql(self,sql):
+        # sanic的路由本质上就是一个异步的，这边调用sql也是异步的话，会导致抢占event loop（所以这个函数只是测试使用）
         loop = asyncio.get_event_loop()
         mysqlutil=MysqlUtil()
-        return loop.run_until_complete(mysqlutil.query(sql))
+        result=loop.run_until_complete(mysqlutil.query(sql))
+        # loop.close()
+        return result
 
 
 if __name__ == '__main__':
