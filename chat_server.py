@@ -10,23 +10,23 @@ import json
 
 # 解决跨域访问的问题
 from sanic_cors import CORS
-
-
 from jinja2 import Environment, PackageLoader
 
 from app.service.DiagnosticTree import DiagnosticTree
-from app.model.DiagnosticNode import DiagnosticNode
+from app.model.GuideTreeInfo import GuideTreeInfo
 from app.service.NoticeService import NoticeService
 from app.service.GuideTreeService import GuideTreeService
 from app.util.CommonUtil import CommonUtil
 from app.util.OrmUtil import OrmUtil
 from app.util.DateEncoder import DateEncoder
 
+from app.util.MysqlUtil import MysqlUtil,Pmysql
+
 env = Environment(loader=PackageLoader('app', 'templates'))
-
 app = Sanic(__name__)
-
 CORS(app)
+# loop = asyncio.get_event_loop()
+# pool = await Pmysql.create_pool(loop, user='root', password='', db='aiops')
 
 @app.route('/')
 async def index(request):
@@ -54,6 +54,39 @@ async def getComponentNotice(request):
                                                                                              "solution", "esid",
                                                                                              "subassembly_name", "moudle","last_modified_date"])},cls=DateEncoder))
 
+# 测试返回根节点信息
+@app.route('/getrootnode')
+async def getGuideNode(request):
+    args = request.get_args(keep_blank_values=True)
+    id=args.get('id')
+    guideNodeResult=await GuideTreeService().getRootNode(id)
+    return text(json.dumps({'resultdesc': 'Notice相关信息如下：', 'resultdata': OrmUtil.toMap(guideNodeResult,
+                                                                                       ["id", "parent_id",
+                                                                                        "guide_name", "level",
+                                                                                        "article_id", "author",
+                                                                                        "publish_date",
+                                                                                        "modify_date"])},cls=DateEncoder))
+
+# 测试返回节点信息
+@app.route('/getnodeinfo')
+async def getGuideNode(request):
+    args = request.get_args(keep_blank_values=True)
+    id=args.get('id')
+    guideNodeResult=await GuideTreeService().getNode(id)
+    return text(json.dumps({'resultdesc': 'Notice相关信息如下：', 'resultdata': OrmUtil.toMap(guideNodeResult,
+                                                                                       ["id", "parent_id",
+                                                                                        "guide_name", "level",
+                                                                                        "article_id", "author",
+                                                                                        "publish_date",
+                                                                                        "modify_date","title"])},cls=DateEncoder))
+
+# 测试返回节点树状结构信息
+@app.route('/nodetree')
+async def getGuideTree(request):
+    args = request.get_args(keep_blank_values=True)
+    id = args.get('id')
+    guideTreeResult = await GuideTreeService().getGuideTrees(id)
+    return text(guideTreeResult)
 
 
 
@@ -74,7 +107,7 @@ async def chat(request, ws):
 # -----------------------------
         # 根据发送过来的消息进行区分，访问数据库中的导引信息推送给客户端
         if (user_msg.find('引导')==0):
-            guideResult=await GuideTreeService().getGuideTree(0)
+            guideResult=await GuideTreeService().getRootNode(0)
             print(guideResult)
             # 这里手动封装一个orm，dto中定义数据模型
             await ws.send(json.dumps({'resultdesc': '请选择如下编号：', 'resultdata': OrmUtil.toMap(guideResult,
@@ -85,7 +118,7 @@ async def chat(request, ws):
                                                                                              "modify_date"])},
                                      cls=DateEncoder))
         elif(CommonUtil.is_number(user_msg)):
-            guideResult = await GuideTreeService().getGuideTree(int(user_msg))
+            guideResult = await GuideTreeService().getRootNode(int(user_msg))
             await ws.send(json.dumps({'resultdesc': '请选择如下编号：', 'resultdata': OrmUtil.toMap(guideResult,
                                                                                             ["id", "parent_id",
                                                                                              "guide_name", "level",
@@ -121,5 +154,6 @@ if __name__ == "__main__":
         NotFound,
         lambda r, e: sanic.response.empty(status=404)
     )
+
     app.run(host="0.0.0.0", port=8001, protocol=WebSocketProtocol, debug=True)
 
