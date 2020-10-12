@@ -20,14 +20,27 @@ class GuideTreeService():
     async def getNode(self,id):
         # if not isinstance(id,int):
         #     raise ValueError('id must be an integer,请检查传入的参数必须为数字id')
-        result=await self.__mysqlUtil.query("select * from guidetree_info a left join t_product_publication b on a.article_id=b.id where a.id="+str(id) )
+        result=await self.__mysqlUtil.query("select a.id,a.parent_id,a.guide_name,a.level,a.article_id,a.author,a.publish_date,a.modify_date,b.title from guidetree_info a left join t_product_publication b on a.article_id=b.id where a.id="+str(id) )
         # print(type(self.__result))
         return result
+
+    # 删除节点
+    async def deleteNode(self,id):
+        try:
+        # if not isinstance(id,int):
+        #     raise ValueError('id must be an integer,请检查传入的参数必须为数字id')
+            result=await self.__mysqlUtil.query("delete from guidetree_info where id=%s" % (id,) )
+        # print(type(self.__result))
+            result='success'
+        except Exception as e:
+            result='failed'
+        finally:
+            return result
 
     async def getRootNode(self,pid):
         # if not isinstance(id,int):
         #     raise ValueError('id must be an integer,请检查传入的参数必须为数字id')
-        result=await self.__mysqlUtil.query("select * from guidetree_info where parent_id="+str(pid))
+        result=await self.__mysqlUtil.query("select a.id,a.parent_id,a.guide_name,a.level,a.article_id,a.author,a.publish_date,a.modify_date,b.title from guidetree_info a left join t_product_publication b on a.article_id=b.id where parent_id="+str(pid))
         # print(type(self.__result))
         return result
 
@@ -84,7 +97,16 @@ class GuideTreeService():
         result=json.dumps(result)
         return result
 
+    # 修改节点信息，传入参数为一个json串
+    async def modifyNode(self,args):
+        await self.__mysqlUtil.query("update guidetree_info set guide_name='"+str(args['guidename'])+"' where id="+str(args['id']))
+        return "success"
 
+
+    async def getArticleList(self,title):
+        result = await self.__mysqlUtil.query("select id,title from t_product_publication where title like '%{title}%'".format(title=title))
+        articlelist = OrmUtil.toMap(result,["id", "title"])
+        return articlelist
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()

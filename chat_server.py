@@ -7,6 +7,7 @@ from sanic.exceptions import NotFound
 from sanic.response import html
 from sanic.response import text
 import json
+import re
 
 # 解决跨域访问的问题
 from sanic_cors import CORS
@@ -15,6 +16,7 @@ from jinja2 import Environment, PackageLoader
 from app.service.DiagnosticTree import DiagnosticTree
 from app.model.GuideTreeInfo import GuideTreeInfo
 from app.service.NoticeService import NoticeService
+from app.service.RobotService import RobotService
 from app.service.GuideTreeService import GuideTreeService
 from app.util.CommonUtil import CommonUtil
 from app.util.OrmUtil import OrmUtil
@@ -80,6 +82,23 @@ async def getGuideNode(request):
                                                                                         "publish_date",
                                                                                         "modify_date","title"])},cls=DateEncoder))
 
+
+# 测试返回节点信息
+@app.route('/deletenode')
+async def getGuideNode(request):
+    args = request.get_args(keep_blank_values=True)
+    id = args.get('id')
+    guideNodeResult = await GuideTreeService().deleteNode(id)
+    return text(json.dumps({'resultdesc': '删除节点状态：', 'resultdata':guideNodeResult}))
+
+
+                           # 测试修改节点信息
+@app.route('/modifynodeinfo',methods=['POST'])
+async def modifyGuideNode(request):
+    args = request.json
+    guideNodeResult = await GuideTreeService().modifyNode(args)
+    return text(json.dumps({'resultdesc':guideNodeResult}))
+
 # 测试返回节点树状结构信息
 @app.route('/nodetree')
 async def getGuideTree(request):
@@ -88,7 +107,13 @@ async def getGuideTree(request):
     guideTreeResult = await GuideTreeService().getGuideTrees(id)
     return text(guideTreeResult)
 
-
+# 测试返回备选的文章列表
+@app.route('/getarticlelist')
+async def getArticlelist(request):
+    args = request.get_args(keep_blank_values=True)
+    title = args.get('title')
+    articleListResult = await GuideTreeService().getArticleList(title)
+    return text(json.dumps({'resultdesc': '文章列表：', 'resultdata':articleListResult}))
 
 @app.websocket('/chat')
 async def chat(request, ws):
@@ -106,29 +131,17 @@ async def chat(request, ws):
 
 # -----------------------------
         # 根据发送过来的消息进行区分，访问数据库中的导引信息推送给客户端
-        if (user_msg.find('引导')==0):
-            guideResult=await GuideTreeService().getRootNode(0)
-            print(guideResult)
+        if (user_msg.replace("\n", "").strip()=='引导'):
+            guideResult=await RobotService().guideMessage(0)
             # 这里手动封装一个orm，dto中定义数据模型
-            await ws.send(json.dumps({'resultdesc': '请选择如下编号：', 'resultdata': OrmUtil.toMap(guideResult,
-                                                                                            ["id", "parent_id",
-                                                                                             "guide_name", "level",
-                                                                                             "article_id", "author",
-                                                                                             "publish_date",
-                                                                                             "modify_date"])},
-                                     cls=DateEncoder))
-        elif(CommonUtil.is_number(user_msg)):
-            guideResult = await GuideTreeService().getRootNode(int(user_msg))
-            await ws.send(json.dumps({'resultdesc': '请选择如下编号：', 'resultdata': OrmUtil.toMap(guideResult,
-                                                                                            ["id", "parent_id",
-                                                                                             "guide_name", "level",
-                                                                                             "article_id", "author",
-                                                                                             "publish_date",
-                                                                                             "modify_date"])},
-                                     cls=DateEncoder))
+            await ws.send(guideResult)
+
+        elif(user_msg.find('引导')==0 and CommonUtil.is_number(re.findall("\d+",user_msg)[0])):
+            guideResult = await RobotService().guideMessage(int(re.findall("\d+",user_msg)[0]))
+            await ws.send(guideResult)
         else:
             # 如果识别不了，可以默认推送相关引导提示消息
-            await ws.send(json.dumps({'resultdesc': NoticeService().defaultChatMessage(), 'resultdata':''}))
+            await ws.send(json.dumps({'resultdesc': RobotService().defaultChatMessage(), 'resultdata':''}))
 
 
 # 测试返回解析好的html文件
