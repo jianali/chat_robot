@@ -99,6 +99,14 @@ async def modifyGuideNode(request):
     guideNodeResult = await GuideTreeService().modifyNode(args)
     return text(json.dumps({'resultdesc':guideNodeResult}))
 
+# 新增引导节点
+@app.route('/insertsubnode',methods=['POST'])
+async def insertSubNode(request):
+    args = request.json
+    guideNodeResult = await GuideTreeService().insertNode(args)
+    return text(json.dumps({'resultdesc':guideNodeResult}))
+
+
 # 测试返回节点树状结构信息
 @app.route('/nodetree')
 async def getGuideTree(request):
@@ -112,7 +120,9 @@ async def getGuideTree(request):
 async def getArticlelist(request):
     args = request.get_args(keep_blank_values=True)
     title = args.get('title')
-    articleListResult = await GuideTreeService().getArticleList(title)
+    components=args.get('components')
+    product_type=args.get('product_type')
+    articleListResult = await GuideTreeService().getArticleList(title,components,product_type)
     return text(json.dumps({'resultdesc': '文章列表：', 'resultdata':articleListResult}))
 
 @app.websocket('/chat')

@@ -5,6 +5,7 @@ from app.util.MysqlUtil import MysqlUtil
 from app.util.DateEncoder import DateEncoder
 import json
 import asyncio
+import datetime
 
 class GuideTreeService():
     '''
@@ -33,6 +34,7 @@ class GuideTreeService():
         # print(type(self.__result))
             result='success'
         except Exception as e:
+            print(e)
             result='failed'
         finally:
             return result
@@ -94,17 +96,42 @@ class GuideTreeService():
         # for node in result：
 
         # guidetreeclass=json.loads(result)
-        result=json.dumps(result)
-        return result
+        # result=json.dumps(result)
+        if(int(id)!=0):
+            result=list(filter(lambda x:x['id']==int(id),result['children']))[0]
+        return json.dumps(result)
 
     # 修改节点信息，传入参数为一个json串
     async def modifyNode(self,args):
         await self.__mysqlUtil.query("update guidetree_info set guide_name='"+str(args['guidename'])+"' where id="+str(args['id']))
         return "success"
 
+    async def insertNode(self,args):
 
-    async def getArticleList(self,title):
-        result = await self.__mysqlUtil.query("select id,title from t_product_publication where title like '%{title}%'".format(title=title))
+        if args['article_id']=='':
+            args['article_id']='null'
+        args.setdefault('article_id', 'null')
+        args.setdefault('level', 3)
+        print("insert into guidetree_info(parent_id,guide_name,level,article_id,author,publish_date,modify_date) "
+              "value ({pid},'{guide_name}',{level},{article_id},'{author}','{publish_date}','{modify_date}')"
+              .format(pid=args['pid'], guide_name=args['guidename'], level=3, article_id=args['article_id'],
+                      author='lj', publish_date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+                      modify_date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+
+        await self.__mysqlUtil.query("insert into guidetree_info(parent_id,guide_name,level,article_id,author,publish_date,modify_date) "
+                                     "value ({pid},'{guide_name}',{level},{article_id},'{author}','{publish_date}','{modify_date}')"
+            .format(pid=args['pid'],guide_name=args['guidename'],level=3,article_id=args['article_id'],author='lj',publish_date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),modify_date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+        return "success"
+
+    async def getArticleList(self,title,components,product_type):
+        if(len(components)!=0):
+            result = await self.__mysqlUtil.query(
+                "select id,title from t_product_publication where components='{components}'".format(components=components))
+        elif(len(product_type)!=0):
+            result = await self.__mysqlUtil.query(
+                "select id,title from t_product_publication where publication_type='{product_type}'".format(product_type=product_type))
+        elif(len(title)!=0):
+            result = await self.__mysqlUtil.query("select id,title from t_product_publication where title like '%{title}%'".format(title=title))
         articlelist = OrmUtil.toMap(result,["id", "title"])
         return articlelist
 
