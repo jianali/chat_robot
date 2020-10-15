@@ -140,6 +140,12 @@ async def chat(request, ws):
 
 
 # -----------------------------
+        # # 如果无法识别走第三方接口开始尬聊
+        intelligence_data = {"key": "free", "appid": 0, "msg": user_msg}
+        r = httpx.get("http://api.qingyunke.com/api.php", params=intelligence_data)
+        chat_msg = r.json()["content"]
+        # print('Sending: ' + chat_msg)
+        # await ws.send(chat_msg)
         # 根据发送过来的消息进行区分，访问数据库中的导引信息推送给客户端
         if (user_msg.replace("\n", "").strip()=='引导'):
             guideResult=await RobotService().guideMessage(0)
@@ -151,7 +157,7 @@ async def chat(request, ws):
             await ws.send(guideResult)
         else:
             # 如果识别不了，可以默认推送相关引导提示消息
-            await ws.send(json.dumps({'resultdesc': RobotService().defaultChatMessage(), 'resultdata':''}))
+            await ws.send(json.dumps({'resultdesc': chat_msg+"<br>"+RobotService().defaultChatMessage(), 'resultdata':''}))
 
 
 # 测试返回解析好的html文件
@@ -164,12 +170,7 @@ async def chat(request, ws):
 
 
 # --------------------------
-        # # 如果无法识别走第三方接口开始尬聊
-        # intelligence_data = {"key": "free", "appid": 0, "msg": user_msg}
-        # r = httpx.get("http://api.qingyunke.com/api.php", params=intelligence_data)
-        # chat_msg = r.json()["content"]
-        # print('Sending: ' + chat_msg)
-        # await ws.send(chat_msg)
+
 
 
 if __name__ == "__main__":
