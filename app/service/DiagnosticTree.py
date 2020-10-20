@@ -1,6 +1,5 @@
 # import Mysqldb
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
+#from flask_sqlalchemy import SQLAlchemy
 
 from app.model.GuideTreeInfo import GuideTreeInfo
 import json

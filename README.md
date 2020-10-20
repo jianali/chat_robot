@@ -21,6 +21,14 @@ pip3 install jinja2==2.10.3
 [2020-05-21 22:17:23 +0800] [8764] [INFO] Goin' Fast @ http://127.0.0.1:8000
 [2020-05-21 22:17:23 +0800] [8764] [INFO] Starting worker [8764]
 ```
+## 部署方式，使用docker的方式部署
+1、编写dockerfile文件，见目录中；
+2、运行命令docker build -t chat_robot . --network=host
+生成镜像包，需要保证当前的的服务器环境是联网状态的
+3、启动方式docker run -d --network=host chat_robot bash
+
+注意：端口冲突，避免使用集群中已监听的端口
+
 
 ## 使用
 
