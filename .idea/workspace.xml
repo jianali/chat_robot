@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="53aecdae-8ab7-46da-8a3e-ce7bac83ec13" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/f964931f-5214-401e-ab8e-bc8612384983.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/f964931f-5214-401e-ab8e-bc8612384983.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/service/DiagnosticTree.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/service/DiagnosticTree.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/service/GuideTreeService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/service/GuideTreeService.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/service/RobotService.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/service/RobotService.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/chat_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/chat_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,7 +17,7 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/chat_robot$pytest_for_MysqlUtil_test__1_.coverage" NAME="pytest for MysqlUtil.test (1) Coverage Results" MODIFIED="1600243423144" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/util" />
-    <SUITE FILE_PATH="coverage/chat_robot$chat_server.coverage" NAME="chat_server Coverage Results" MODIFIED="1603186163197" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/chat_robot$chat_server.coverage" NAME="chat_server Coverage Results" MODIFIED="1603356727996" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/chat_robot$pytest_in_MysqlUtil_py.coverage" NAME="pytest in MysqlUtil.py Coverage Results" MODIFIED="1600243663582" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/util" />
     <SUITE FILE_PATH="coverage/chat_robot$DiagnosticNodeService.coverage" NAME="DiagnosticNodeService Coverage Results" MODIFIED="1600395957275" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/service" />
     <SUITE FILE_PATH="coverage/chat_robot$DiagnosticTree.coverage" NAME="DiagnosticTree Coverage Results" MODIFIED="1599478012868" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app/service" />
@@ -62,7 +62,7 @@
     <session id="2062543208">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.15" value="1" />
@@ -74,25 +74,26 @@
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.48" value="1" />
           <entry key="project.open.time.56" value="1" />
+          <entry key="project.open.time.66" value="1" />
           <entry key="project.open.time.72" value="1" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="Dockerfile" value="1" />
-          <entry key="guidetree_info" value="11" />
+          <entry key="guidetree_info" value="15" />
           <entry key="html" value="2" />
-          <entry key="md" value="8" />
-          <entry key="py" value="137" />
+          <entry key="md" value="9" />
+          <entry key="py" value="141" />
           <entry key="question" value="4" />
-          <entry key="sql" value="23" />
+          <entry key="sql" value="24" />
           <entry key="t_article_type" value="2" />
           <entry key="t_diagnostic_file" value="2" />
           <entry key="t_diagnostic_item" value="6" />
           <entry key="t_diagnostic_tree" value="8" />
           <entry key="t_option" value="1" />
-          <entry key="t_product_publication" value="4" />
+          <entry key="t_product_publication" value="5" />
           <entry key="t_sla_email" value="1" />
           <entry key="t_sla_issue" value="1" />
           <entry key="t_solution_steps" value="1" />
@@ -103,14 +104,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Database Element" value="44" />
+          <entry key="Database Element" value="49" />
           <entry key="Dockerfile" value="1" />
           <entry key="HTML" value="2" />
-          <entry key="Markdown" value="8" />
+          <entry key="Markdown" value="9" />
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="137" />
+          <entry key="Python" value="141" />
           <entry key="SQL" value="17" />
-          <entry key="Scratch" value="6" />
+          <entry key="Scratch" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -120,9 +121,9 @@
           <entry key="dummy" value="46" />
           <entry key="html" value="1" />
           <entry key="md" value="1827" />
-          <entry key="py" value="9849" />
-          <entry key="sql" value="2550" />
-          <entry key="txt" value="95" />
+          <entry key="py" value="10639" />
+          <entry key="sql" value="2600" />
+          <entry key="txt" value="107" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -130,10 +131,10 @@
           <entry key="Dockerfile" value="8" />
           <entry key="HTML" value="1" />
           <entry key="Markdown" value="1827" />
-          <entry key="PLAIN_TEXT" value="141" />
-          <entry key="Python" value="9848" />
-          <entry key="SQL" value="1136" />
-          <entry key="Scratch" value="1463" />
+          <entry key="PLAIN_TEXT" value="153" />
+          <entry key="Python" value="10630" />
+          <entry key="SQL" value="1144" />
+          <entry key="Scratch" value="1513" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages">
@@ -148,7 +149,58 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/version">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f964931f-5214-401e-ab8e-bc8612384983/console.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="16" column="43" selection-start-line="16" selection-end-line="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/chat_server.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-528">
+              <caret line="111" selection-start-line="111" selection-end-line="111" />
+              <folding>
+                <element signature="e#0#12#0" expanded="true" />
+                <marker date="1603335981125" expanded="true" signature="2794:3047" ph="..." />
+                <marker date="1603335981125" expanded="true" signature="3900:4244" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/util/MysqlUtil.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="112">
+              <caret line="81" column="42" lean-forward="true" selection-start-line="81" selection-start-column="42" selection-end-line="81" selection-end-column="42" />
+              <folding>
+                <element signature="e#15#30#0" expanded="true" />
+                <marker date="1602213227926" expanded="true" signature="147:148" ph="..." />
+                <marker date="1602213227926" expanded="true" signature="326:335" ph="..." />
+                <marker date="1602213227926" expanded="true" signature="1635:2847" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/service/RobotService.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="35" column="21" lean-forward="true" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+                <marker date="1603356721701" expanded="true" signature="851:860" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/guidetree_info">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state>
               <filtering enabled="true" />
@@ -156,45 +208,49 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/version.sql">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/chat_server.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3696">
-              <caret line="177" column="17" selection-start-line="177" selection-start-column="17" selection-end-line="177" selection-end-column="17" />
-              <folding>
-                <element signature="e#0#12#0" expanded="true" />
-                <marker date="1603186160328" expanded="true" signature="3911:4164" ph="..." />
-                <marker date="1603186160328" expanded="true" signature="4971:5315" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/service/DiagnosticTree.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="44">
-              <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-              <folding>
-                <element signature="e#59#108#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/service/GuideTreeService.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="287">
+              <caret line="77" column="41" lean-forward="true" selection-start-line="77" selection-start-column="41" selection-end-line="77" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#49#0" expanded="true" />
+                <marker date="1603352980454" expanded="true" signature="243:248" ph="..." />
+                <marker date="1603352980454" expanded="true" signature="2822:2831" ph="..." />
+                <marker date="1603352980454" expanded="true" signature="3466:3467" ph="..." />
+                <marker date="1603352980454" expanded="true" signature="3466:3828" ph="..." />
+                <marker date="1603352980454" expanded="true" signature="3829:3838" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="362">
-                <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+              <first_editor relative-caret-position="220">
+                <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
               </first_editor>
               <second_editor />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/Lib/asyncio/coroutines.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="129">
+              <caret line="109" selection-start-line="109" selection-end-line="109" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/t_product_publication">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -206,38 +262,6 @@
               <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/requirements.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/question">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/question.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="352">
-              <caret line="16" column="62" selection-start-line="16" selection-start-column="62" selection-end-line="16" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/__init__.py">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -254,6 +278,7 @@
       <find>useUnicode</find>
       <find>__result</find>
       <find>defaultChatMessage</find>
+      <find>lj</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -293,15 +318,15 @@
         <option value="$PROJECT_DIR$/app/util/OrmUtil.py" />
         <option value="$PROJECT_DIR$/app/model/GuideTreeInfo.py" />
         <option value="$PROJECT_DIR$/app/util/MysqlUtil.py" />
-        <option value="$PROJECT_DIR$/app/service/GuideTreeService.py" />
-        <option value="$PROJECT_DIR$/app/service/RobotService.py" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/f964931f-5214-401e-ab8e-bc8612384983/console.sql" />
         <option value="f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/question.sql" />
-        <option value="$PROJECT_DIR$/chat_server.py" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/Dockerfile" />
         <option value="$PROJECT_DIR$/app/service/DiagnosticTree.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/f964931f-5214-401e-ab8e-bc8612384983/console.sql" />
+        <option value="$PROJECT_DIR$/chat_server.py" />
+        <option value="$PROJECT_DIR$/app/service/GuideTreeService.py" />
+        <option value="$PROJECT_DIR$/app/service/RobotService.py" />
       </list>
     </option>
   </component>
@@ -312,10 +337,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1714" />
+    <option name="x" value="1515" />
     <option name="y" value="-8" />
-    <option name="width" value="983" />
-    <option name="height" value="521" />
+    <option name="width" value="1378" />
+    <option name="height" value="741" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -347,6 +372,12 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="chat_robot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="chat_robot" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -357,7 +388,7 @@
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="database.console.LAST_STATE" value="true" />
+    <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -571,7 +602,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602743468287</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="测试环境上线测试">
+      <created>1603195388112</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1603195388112</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -617,21 +655,20 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18390192" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14765458" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.2559653" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.26229507" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.33770493" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4815618" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.329718" />
-      <window_info anchor="bottom" id="Database Console" order="7" visible="true" weight="0.2657267" />
+      <window_info anchor="bottom" id="Database Console" order="7" weight="0.2646421" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" visible="true" weight="0.2570499" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.2570499" />
       <window_info anchor="bottom" id="Database Changes" order="10" weight="0.329718" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286334" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
@@ -641,7 +678,7 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" weight="0.32995737" />
-      <window_info anchor="right" id="Database" order="4" sideWeight="0.4989154" visible="true" weight="0.13965885" />
+      <window_info anchor="right" id="Database" order="4" sideWeight="0.4989154" visible="true" weight="0.1673774" />
       <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="5" sideWeight="0.5010846" side_tool="true" visible="true" weight="0.16897655" />
     </layout>
     <layout-to-restore>
@@ -680,7 +717,8 @@
     <MESSAGE value="增加相关接口功能定义" />
     <MESSAGE value="增加相关接口功能定义并调试完成主要接口功能&#10;完成聊天对话功能的消息对接" />
     <MESSAGE value="接口补充完善" />
-    <option name="LAST_COMMIT_MESSAGE" value="接口补充完善" />
+    <MESSAGE value="测试环境上线测试" />
+    <option name="LAST_COMMIT_MESSAGE" value="测试环境上线测试" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -697,42 +735,62 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/chat_server.py</url>
-          <line>109</line>
+          <line>99</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/chat_server.py</url>
-          <line>149</line>
+          <line>139</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app/service/GuideTreeService.py</url>
-          <line>123</line>
+          <line>132</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app/service/GuideTreeService.py</url>
-          <line>101</line>
+          <line>113</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app/service/GuideTreeService.py</url>
-          <line>99</line>
+          <line>111</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/chat_server.py</url>
-          <line>121</line>
+          <line>111</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app/service/GuideTreeService.py</url>
-          <line>133</line>
+          <line>144</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/app/service/DiagnosticTree.py</url>
           <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/service/GuideTreeService.py</url>
+          <line>94</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/service/GuideTreeService.py</url>
+          <line>87</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/service/GuideTreeService.py</url>
+          <line>96</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/service/RobotService.py</url>
+          <line>35</line>
+          <option name="timeStamp" value="54" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -753,11 +811,22 @@
         <watch expression="args.setdefault(&quot;article_id&quot;,'null')" language="Python" />
         <watch expression="args.keys()" language="Python" />
         <watch expression="len(components)" language="Python" />
+        <watch expression="lookup[childnode['id']]" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
+      <expression>
+        <expression-string>lookup[childnode['id']]</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>lookup[childnode['id']</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>len(components)</expression-string>
         <language-id>Python</language-id>
@@ -795,11 +864,6 @@
       </expression>
       <expression>
         <expression-string>list(filter(lambda x:x['id']==int(id),result['children']))</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>list(filter(lambda x:x['id']==1,result['children']))</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
@@ -993,13 +1057,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/guidetree_info">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/Lib/site-packages/sanic/app.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="158">
@@ -1014,39 +1071,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/Lib/asyncio/coroutines.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2134">
-          <caret line="109" selection-start-line="109" selection-end-line="109" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/t_product_publication.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
           <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/service/RobotService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="18" column="29" selection-start-line="18" selection-start-column="29" selection-end-line="18" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-            <marker date="1602677753980" expanded="true" signature="851:860" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/service/GuideTreeService.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2596">
-          <caret line="125" column="63" selection-start-line="125" selection-start-column="63" selection-end-line="125" selection-end-column="63" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-            <marker date="1602672894749" expanded="true" signature="243:248" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1060,30 +1088,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/util/MysqlUtil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1606">
-          <caret line="76" column="14" selection-start-line="76" selection-start-column="14" selection-end-line="76" selection-end-column="14" />
-          <folding>
-            <element signature="e#15#30#0" expanded="true" />
-            <marker date="1602213227926" expanded="true" signature="147:148" ph="..." />
-            <marker date="1602213227926" expanded="true" signature="326:335" ph="..." />
-            <marker date="1602213227926" expanded="true" signature="1635:2847" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/t_article_type">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f964931f-5214-401e-ab8e-bc8612384983/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="28" column="37" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -1108,13 +1116,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/t_product_publication">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/version">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
@@ -1125,13 +1126,6 @@
     <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/version.sql">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/question">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/question.sql">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -1139,8 +1133,71 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/service/DiagnosticTree.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+          <folding>
+            <element signature="e#59#108#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/requirements.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/question">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/f964931f-5214-401e-ab8e-bc8612384983/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="16" column="43" selection-start-line="16" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/t_product_publication">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://f964931f-5214-401e-ab8e-bc8612384983/schema/aiops/table/guidetree_info">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Continuum/anaconda3/Lib/asyncio/coroutines.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="109" selection-start-line="109" selection-end-line="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/service/RobotService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="35" column="21" lean-forward="true" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+            <marker date="1603356721701" expanded="true" signature="851:860" ph="..." />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Dockerfile">
       <provider selected="true" editor-type-id="text-editor">
@@ -1149,42 +1206,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/requirements.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="31" column="17" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="17" />
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="220">
+            <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chat_server.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3696">
-          <caret line="177" column="17" selection-start-line="177" selection-start-column="17" selection-end-line="177" selection-end-column="17" />
+        <state relative-caret-position="-528">
+          <caret line="111" selection-start-line="111" selection-end-line="111" />
           <folding>
             <element signature="e#0#12#0" expanded="true" />
-            <marker date="1603186160328" expanded="true" signature="3911:4164" ph="..." />
-            <marker date="1603186160328" expanded="true" signature="4971:5315" ph="..." />
+            <marker date="1603335981125" expanded="true" signature="2794:3047" ph="..." />
+            <marker date="1603335981125" expanded="true" signature="3900:4244" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/service/DiagnosticTree.py">
+    <entry file="file://$PROJECT_DIR$/app/util/MysqlUtil.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        <state relative-caret-position="112">
+          <caret line="81" column="42" lean-forward="true" selection-start-line="81" selection-start-column="42" selection-end-line="81" selection-end-column="42" />
           <folding>
-            <element signature="e#59#108#0" expanded="true" />
+            <element signature="e#15#30#0" expanded="true" />
+            <marker date="1602213227926" expanded="true" signature="147:148" ph="..." />
+            <marker date="1602213227926" expanded="true" signature="326:335" ph="..." />
+            <marker date="1602213227926" expanded="true" signature="1635:2847" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="362">
-            <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/app/service/GuideTreeService.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="77" column="41" lean-forward="true" selection-start-line="77" selection-start-column="41" selection-end-line="77" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+            <marker date="1603352980454" expanded="true" signature="243:248" ph="..." />
+            <marker date="1603352980454" expanded="true" signature="2822:2831" ph="..." />
+            <marker date="1603352980454" expanded="true" signature="3466:3467" ph="..." />
+            <marker date="1603352980454" expanded="true" signature="3466:3828" ph="..." />
+            <marker date="1603352980454" expanded="true" signature="3829:3838" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

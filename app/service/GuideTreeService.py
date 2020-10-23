@@ -21,16 +21,26 @@ class GuideTreeService():
     async def getNode(self,id):
         # if not isinstance(id,int):
         #     raise ValueError('id must be an integer,请检查传入的参数必须为数字id')
-        result=await self.__mysqlUtil.query("select a.id,a.parent_id,a.guide_name,a.level,a.article_id,a.author,a.publish_date,a.modify_date,b.title from guidetree_info a left join t_product_publication b on a.article_id=b.id where a.id="+str(id) )
+        result=await self.__mysqlUtil.query("select a.id,a.parent_id,a.guide_name,a.article_id,a.author,a.publish_date,a.modify_date,b.title "
+                                            "from guidetree_info a left join t_product_publication b "
+                                            "on a.article_id=b.id where state=1 and a.id={id}"
+                                            .format(id=str(id)))
         # print(type(self.__result))
-        return result
+        nodemap=OrmUtil.toMap(result,
+                      ["id", "parent_id",
+                       "guide_name",
+                       "article_id", "author",
+                       "publish_date",
+                       "modify_date", "title"])
+        return nodemap
 
     # 删除节点
     async def deleteNode(self,id):
         try:
         # if not isinstance(id,int):
         #     raise ValueError('id must be an integer,请检查传入的参数必须为数字id')
-            result=await self.__mysqlUtil.query("delete from guidetree_info where id=%s" % (id,) )
+        #     result=await self.__mysqlUtil.query("delete from guidetree_info where id=%s" % (id,) )
+            result = await self.__mysqlUtil.query("update guidetree_info set state=0 where id={id}".format(id=id))
         # print(type(self.__result))
             result='success'
         except Exception as e:
@@ -42,68 +52,74 @@ class GuideTreeService():
     async def getRootNode(self,pid):
         # if not isinstance(id,int):
         #     raise ValueError('id must be an integer,请检查传入的参数必须为数字id')
-        result=await self.__mysqlUtil.query("select a.id,a.parent_id,a.guide_name,a.level,a.article_id,a.author,a.publish_date,a.modify_date,b.title from guidetree_info a left join t_product_publication b on a.article_id=b.id where parent_id="+str(pid))
+        result=await self.__mysqlUtil.query("select a.id,a.parent_id,a.guide_name,a.article_id,a.author,a.publish_date,a.modify_date,b.title "
+                                            "from guidetree_info a left join t_product_publication b "
+                                            "on a.article_id=b.id "
+                                            "where parent_id={pid} and state=1"
+                                            .format(pid=str(pid)))
+        rootmap=OrmUtil.toMap(result,
+                      ["id", "parent_id",
+                       "guide_name",
+                       "article_id", "author",
+                       "publish_date",
+                       "modify_date"])
         # print(type(self.__result))
-        return result
+        return rootmap
 
     def listToDict(self,input):
-        root={}
+        # root={}
+        # lookup={}
+        # root['name'] = 'rootnode';
+        # lookup[0] = root
+        # for item in input:
+        #     if item['parent_id'] in lookup.keys():
+        #         node={'name':item['guide_name'],'id':item['id']}
+        #         lookup[item['parent_id']].setdefault('children',[]).append(node)
+        #         lookup[item['id']]=node
+
+# 下面是使用递归的实现方式，深度优先遍历
         lookup={}
-        root['name'] = 'rootnode';
-        lookup[0] = root
         for item in input:
-            if item['parent_id'] in lookup.keys():
-                node={'name':item['guide_name'],'id':item['id']}
-                lookup[item['parent_id']].setdefault('children',[]).append(node)
-                lookup[item['id']]=node
+            node = {'name': item['guide_name'], 'id': item['id']}
+            lookup.setdefault(item['parent_id'],[])
+            lookup[item['parent_id']].append(node)
+
+        def child(childnode):
+            if childnode['id'] in lookup.keys():
+                arr=[]
+                for item in lookup[childnode['id']]:
+                    arr.append({'name':item['name'],'id':item['id'],'children':child({'id':item['id']})})
+                return arr
+            else:
+                return []
+        root={'name':'rootnode','children':child({'id':0})}
+
         return root
 
     # 使用算法，加载出所有的目录树
     async def getGuideTrees(self, id):
-        guidetreesresult = await self.__mysqlUtil.query("select * from guidetree_info order by id")
+        guidetreesresult = await self.__mysqlUtil.query("select * from guidetree_info where state=1 order by id,parent_id")
         # print(type(self.__result))
-        guidemap=OrmUtil.toMap(guidetreesresult,
-                      ["id", "parent_id",
-                       "guide_name", "level",
-                       "article_id", "author",
-                       "publish_date",
-                       "modify_date"])
-        result=self.listToDict(guidemap)
-        # guideinfomaps={}
-        # for guideitem in guidemap:
-        #     tmp=GuideTreeInfo("","","","","","","","")
-        #     tmp.__dict__=guideitem
-        #     tmp.childNodes=[]
-        #     guideinfomaps[tmp.id]=tmp
-        # # 开始重构以id为首的树形结构
-        # guidetree=guideinfomaps[id]
-        # for tempId in guideinfomaps.keys():
-        #     tempNode = guideinfomaps[tempId]
-        #     pid = tempNode.getParentId()
-        #     if pid!=0 and pid in guideinfomaps.keys():
-        #         pNode = guideinfomaps[pid]
-        #         pNode.childNodes.append(tempNode)
-        # bbb=guideinfomaps[id].__dict__
-        #
-        # result=json.dumps(guideinfomaps[id].__dict__, cls=DateEncoder)
-        # 进一步将数组转换为DiagnosticNode对象
-        # json.dumps({'resultdesc': 'Notice相关信息如下：', 'resultdata': OrmUtil.toMap(guideNodeResult,
-        #                                                                        ["id", "parent_id",
-        #                                                                         "guide_name", "level",
-        #                                                                         "article_id", "author",
-        #                                                                         "publish_date",
-        #                                                                         "modify_date"])}, cls=DateEncoder)
-        # for node in result：
-
-        # guidetreeclass=json.loads(result)
-        # result=json.dumps(result)
-        if(int(id)!=0):
-            result=list(filter(lambda x:x['id']==int(id),result['children']))[0]
+        result=[]
+        if len(guidetreesresult)>0:
+            guidemap=OrmUtil.toMap(guidetreesresult,
+                          ["id", "parent_id",
+                           "guide_name", "level",
+                           "article_id", "author",
+                           "publish_date",
+                           "modify_date"])
+            result=self.listToDict(guidemap)
+            if(int(id)!=0):
+                result=list(filter(lambda x:x['id']==int(id),result['children']))[0]
         return json.dumps(result)
 
     # 修改节点信息，传入参数为一个json串
     async def modifyNode(self,args):
-        await self.__mysqlUtil.query("update guidetree_info set guide_name='"+str(args['guidename'])+"' where id="+str(args['id']))
+        await self.__mysqlUtil.query("update guidetree_info set guide_name='{guidename}',"
+                                     "article_id='{articleid}',"
+                                     "parent_id='{pid}',"
+                                     "modify_date='{modifydata}' where id={id}"
+                                     .format(id=str(args['id']),guidename=str(args['guidename']),articleid=str(args['article_id']),pid=args['pid'],modifydata=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         return "success"
 
     async def insertNode(self,args):
@@ -111,19 +127,14 @@ class GuideTreeService():
         if args['article_id']=='':
             args['article_id']='null'
         args.setdefault('article_id', 'null')
-        args.setdefault('level', 3)
-        print("insert into guidetree_info(parent_id,guide_name,level,article_id,author,publish_date,modify_date) "
-              "value ({pid},'{guide_name}',{level},{article_id},'{author}','{publish_date}','{modify_date}')"
-              .format(pid=args['pid'], guide_name=args['guidename'], level=3, article_id=args['article_id'],
-                      author='lj', publish_date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                      modify_date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
-
-        await self.__mysqlUtil.query("insert into guidetree_info(parent_id,guide_name,level,article_id,author,publish_date,modify_date) "
-                                     "value ({pid},'{guide_name}',{level},{article_id},'{author}','{publish_date}','{modify_date}')"
-            .format(pid=args['pid'],guide_name=args['guidename'],level=3,article_id=args['article_id'],author='lj',publish_date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),modify_date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+        await self.__mysqlUtil.query("insert into guidetree_info(parent_id,guide_name,state,article_id,author,publish_date,modify_date) "
+                                     "value ({pid},'{guide_name}','{state}',{article_id},'{author}','{publish_date}','{modify_date}')"
+            .format(pid=args['pid'],guide_name=args['guidename'],state=1,article_id=args['article_id'],author=args['author'],publish_date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),modify_date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         return "success"
 
+
     async def getArticleList(self,title,components,product_type):
+        result=[]
         if(len(components)!=0):
             result = await self.__mysqlUtil.query(
                 "select id,title from t_product_publication where components='{components}'".format(components=components))

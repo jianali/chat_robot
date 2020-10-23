@@ -62,12 +62,7 @@ async def getGuideNode(request):
     args = request.get_args(keep_blank_values=True)
     id=args.get('id')
     guideNodeResult=await GuideTreeService().getRootNode(id)
-    return text(json.dumps({'resultdesc': 'Notice相关信息如下：', 'resultdata': OrmUtil.toMap(guideNodeResult,
-                                                                                       ["id", "parent_id",
-                                                                                        "guide_name", "level",
-                                                                                        "article_id", "author",
-                                                                                        "publish_date",
-                                                                                        "modify_date"])},cls=DateEncoder))
+    return text(json.dumps({'resultdesc': 'Notice相关信息如下：', 'resultdata': guideNodeResult}, cls = DateEncoder))
 
 # 测试返回节点信息
 @app.route('/getnodeinfo')
@@ -75,12 +70,7 @@ async def getGuideNode(request):
     args = request.get_args(keep_blank_values=True)
     id=args.get('id')
     guideNodeResult=await GuideTreeService().getNode(id)
-    return text(json.dumps({'resultdesc': 'Notice相关信息如下：', 'resultdata': OrmUtil.toMap(guideNodeResult,
-                                                                                       ["id", "parent_id",
-                                                                                        "guide_name", "level",
-                                                                                        "article_id", "author",
-                                                                                        "publish_date",
-                                                                                        "modify_date","title"])},cls=DateEncoder))
+    return text(json.dumps({'resultdesc': 'nodeinfo', 'resultdata':guideNodeResult},cls=DateEncoder))
 
 
 # 测试返回节点信息
@@ -97,14 +87,14 @@ async def getGuideNode(request):
 async def modifyGuideNode(request):
     args = request.json
     guideNodeResult = await GuideTreeService().modifyNode(args)
-    return text(json.dumps({'resultdesc':guideNodeResult}))
+    return text(json.dumps({'resultdesc':'修改节点状态：', 'resultdata':guideNodeResult}))
 
 # 新增引导节点
 @app.route('/insertsubnode',methods=['POST'])
 async def insertSubNode(request):
     args = request.json
     guideNodeResult = await GuideTreeService().insertNode(args)
-    return text(json.dumps({'resultdesc':guideNodeResult}))
+    return text(json.dumps({'resultdesc':'新增节点状态','resultdata':guideNodeResult}))
 
 
 # 测试返回节点树状结构信息

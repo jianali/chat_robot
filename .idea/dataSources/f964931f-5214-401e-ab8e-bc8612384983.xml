@@ -1222,6 +1222,7 @@
     </key>
     <column id="319" parent="232" name="id">
       <Position>1</Position>
+      <Comment>引导树自己的id</Comment>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
@@ -1239,9 +1240,9 @@
       <DataType>varchar(220)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="322" parent="232" name="level">
+    <column id="322" parent="232" name="state">
       <Position>4</Position>
-      <Comment>当前引导树处于多叉树的那个层级，用于(广度优先遍历)输出每一层的结果</Comment>
+      <Comment>节点状态，失效为0，有效为1</Comment>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>

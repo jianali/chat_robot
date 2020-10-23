@@ -31,12 +31,7 @@ class RobotService():
     async def guideMessage(self,id):
         guideResult =  await GuideTreeService().getRootNode(id)
         # 这里手动封装一个orm，dto中定义数据模型
-        result=json.dumps({'resultdesc': '请选择如下编号：', 'resultdata': OrmUtil.toMap(guideResult,
-                                                                                  ["id", "parent_id",
-                                                                                   "guide_name", "level",
-                                                                                   "article_id", "author",
-                                                                                   "publish_date",
-                                                                                   "modify_date","title"])},
+        result=json.dumps({'resultdesc': '请选择如下编号：', 'resultdata': guideResult},
                            cls=DateEncoder)
         return result
 
