@@ -62,7 +62,7 @@ class GuideTreeService():
                        "guide_name",
                        "article_id", "author",
                        "publish_date",
-                       "modify_date"])
+                       "modify_date","title"])
         # print(type(self.__result))
         return rootmap
 
@@ -115,12 +115,23 @@ class GuideTreeService():
 
     # 修改节点信息，传入参数为一个json串
     async def modifyNode(self,args):
+        # 关于里面的键值校验是否为空，这个里面感觉是可以做成一个工具方法
+        if args['article_id']=='':
+            args['article_id']='null'
         await self.__mysqlUtil.query("update guidetree_info set guide_name='{guidename}',"
                                      "article_id='{articleid}',"
                                      "parent_id='{pid}',"
                                      "modify_date='{modifydata}' where id={id}"
                                      .format(id=str(args['id']),guidename=str(args['guidename']),articleid=str(args['article_id']),pid=args['pid'],modifydata=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
         return "success"
+
+    # 保存聊天记录
+    async def saveChatHistory(self,args):
+        await self.__mysqlUtil.query("insert into chat_history(recordtext,author,publish_date)"
+                                     "value ('{recordtext}','{author}','{publish_date}')"
+                                     .format(recordtext=str(args['messages'][-1]).replace("'","").replace('"','').replace(',',''),author=args['author'],publish_date=datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
+        return "success"
+
 
     async def insertNode(self,args):
 

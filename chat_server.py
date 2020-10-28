@@ -81,13 +81,19 @@ async def getGuideNode(request):
     guideNodeResult = await GuideTreeService().deleteNode(id)
     return text(json.dumps({'resultdesc': '删除节点状态：', 'resultdata':guideNodeResult}))
 
-
-                           # 测试修改节点信息
+# 测试修改节点信息
 @app.route('/modifynodeinfo',methods=['POST'])
 async def modifyGuideNode(request):
     args = request.json
     guideNodeResult = await GuideTreeService().modifyNode(args)
     return text(json.dumps({'resultdesc':'修改节点状态：', 'resultdata':guideNodeResult}))
+
+# 保存历史聊天记录
+@app.route('/insertchathistory',methods=['POST'])
+async def insertChatHistory(request):
+    args = request.json
+    chatHistoryResult = await GuideTreeService().saveChatHistory(args)
+    return text(json.dumps({'resultdesc':'保存聊天记录：', 'resultdata':chatHistoryResult}))
 
 # 新增引导节点
 @app.route('/insertsubnode',methods=['POST'])
@@ -124,10 +130,14 @@ async def chat(request, ws):
     :return:
     """
     while True:
+        # 判断连接是否关闭，关闭的话则保存聊天记录
+        print(str(ws.open) + '11111')
         user_msg = await ws.recv()
         # user_msg为客户发送过来的消息
         print('Received: ' + user_msg)
 
+        if ws.closed:
+            print('当前聊天已经结束！！！')
 
 # -----------------------------
         # # 如果无法识别走第三方接口开始尬聊
@@ -142,12 +152,14 @@ async def chat(request, ws):
             # 这里手动封装一个orm，dto中定义数据模型
             await ws.send(guideResult)
 
-        elif(user_msg.find('引导')==0 and CommonUtil.is_number(re.findall("\d+",user_msg)[0])):
-            guideResult = await RobotService().guideMessage(int(re.findall("\d+",user_msg)[0]))
+        # user_msg.find('引导') == 0 and CommonUtil.is_number(re.findall("\d+",user_msg)[0])
+        elif(CommonUtil.is_number(user_msg)):
+            guideResult = await RobotService().guideMessage(user_msg)
             await ws.send(guideResult)
         else:
             # 如果识别不了，可以默认推送相关引导提示消息
             await ws.send(json.dumps({'resultdesc': "<br>"+RobotService().defaultChatMessage(), 'resultdata':''}))
+
 
 
 # 测试返回解析好的html文件
