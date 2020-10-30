@@ -4,36 +4,51 @@ import aiomysql
 import asyncio
 import logging
 import traceback
+from config_default import configs
 '''
-mysql 异步版本，后续可以改成数据库连接池
+mysql 异步版本，数据库连接池
 '''
 
 logobj = logging.getLogger('mysql')
 
+
 class Pmysql:
+    # 本质上这个就是一个静态变量、类变量，用来实现python环境下的单例
     __connection = None
+    __pool = None
+
 
     def __init__(self):
         self.cursor = None
         self.connection = None
+        # self.pool=None
 
+    # 连接池的创建使用单例模式
     @staticmethod
     async def create_pool(loop, **kw):
-        # logging.info('create database connection pool...')
-        global __pool
-        __pool =await aiomysql.create_pool(
-            host=kw.get('host', '172.26.4.18'),
-            port=kw.get('port', 3307),
-            user=kw['user'],
-            password=kw['password'],
-            db=kw['db'],
-            charset=kw.get('charset', 'utf8'),
-            autocommit=kw.get('autocommit', True),
-            maxsize=kw.get('maxsize', 10),
-            minsize=kw.get('minsize', 1),
-            loop=loop
-        )
-        return __pool
+        if Pmysql.__pool==None:
+            try:
+                logobj.info('create database connection pool...')
+                # global __pool
+                pool =await aiomysql.create_pool(
+                    host=configs['dbpool']['host'],
+                    port=configs['dbpool']['port'],
+                    user=configs['dbpool']['user'],
+                    password=configs['dbpool']['password'],
+                    db=configs['dbpool']['db'],
+                    charset=configs['dbpool']['charset'],
+                    autocommit=configs['dbpool']['autocommit'],
+                    maxsize=configs['dbpool']['maxsize'],
+                    minsize=configs['dbpool']['minsize'],
+                    loop=loop
+                )
+                if pool:
+                    Pmysql.__pool=pool
+            except:
+                logobj.error('create mysql connection pool error!',exc_info=True)
+            return pool
+        else:
+            return Pmysql.__pool
 
     @staticmethod
     async def getconnection():
@@ -74,6 +89,7 @@ class MysqlUtil:
         conn.close()
 
     # 查询操作
+    # 这里做一个改动，将下面的Pmysql类封装为一个单例使用
     async def query(self,sql):
         mysqlobj = Pmysql()
         # conn = await Pmysql.getconnection()

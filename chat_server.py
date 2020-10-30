@@ -8,6 +8,7 @@ from sanic.response import html
 from sanic.response import text
 import json
 import re
+import logging
 
 # 解决跨域访问的问题
 from sanic_cors import CORS
@@ -23,12 +24,17 @@ from app.util.OrmUtil import OrmUtil
 from app.util.DateEncoder import DateEncoder
 
 from app.util.MysqlUtil import MysqlUtil,Pmysql
+from config_default import configs
 
 env = Environment(loader=PackageLoader('app', 'templates'))
 app = Sanic(__name__)
 CORS(app)
 # loop = asyncio.get_event_loop()
 # pool = await Pmysql.create_pool(loop, user='root', password='', db='aiops')
+#日志记录
+
+logging.basicConfig(filename=configs['log']['path'],level=configs['log']['level'])
+
 
 @app.route('/')
 async def index(request):
