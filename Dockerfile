@@ -6,6 +6,6 @@ COPY . /app
 VOLUME /var/transwarp
 WORKDIR /app
 RUN pip install -r requirements.txt -i https://pypi.doubanio.com/simple
-EXPOSE 8001 8001
+EXPOSE 8082 8082
 # python -m sanic chat_server.app --host=0.0.0.0 --port=1337 --workers=4
 ENTRYPOINT ["python", "/app/chat_server.py"]

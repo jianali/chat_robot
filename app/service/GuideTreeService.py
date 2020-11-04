@@ -146,14 +146,18 @@ class GuideTreeService():
 
     async def getArticleList(self,title,components,product_type):
         result=[]
-        if(len(components)!=0):
-            result = await self.__mysqlUtil.query(
-                "select id,title from t_product_publication where components='{components}'".format(components=components))
-        elif(len(product_type)!=0):
-            result = await self.__mysqlUtil.query(
-                "select id,title from t_product_publication where publication_type='{product_type}'".format(product_type=product_type))
-        elif(len(title)!=0):
-            result = await self.__mysqlUtil.query("select id,title from t_product_publication where title like '%{title}%'".format(title=title))
+        titleCondition="and title like '%{title}%'".format(title=title) if len(title) != 0 else ""
+        publication_typeCondition="and publication_type='{product_type}'".format(product_type=product_type) if len(product_type)!=0 else ""
+        componentsCondition="and components like '{components}'".format(components=components) if len(components)!=0 else ""
+        #
+        # if (len(title) != 0):
+        #     result = await self.__mysqlUtil.query(
+        #         "select id,title from t_product_publication where title like '%{title}%'".format(title=title))
+        # else:
+        #     if(len(components)!=0 or len(product_type)!=0):
+
+        result = await self.__mysqlUtil.query(
+                "select id,title from t_product_publication where 1=1 {condition} order by last_modified_date desc limit 10".format(condition=titleCondition+publication_typeCondition+componentsCondition))
         articlelist = OrmUtil.toMap(result,["id", "title"])
         return articlelist
 
